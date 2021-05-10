@@ -9,12 +9,11 @@
  *   https://sailsjs.com/anatomy/tasks/config/uglify.js
  *
  */
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
   grunt.config.set('uglify', {
     dist: {
       src: ['.tmp/public/concat/production.js'],
-      dest: '.tmp/public/min/production.min.js'
+      dest: '.tmp/public/min/production.min.js',
     },
     options: {
       mangle: {
@@ -28,13 +27,13 @@ module.exports = function(grunt) {
           'Location',
           'RttcRefPlaceholder',
         ],
-        keep_fnames: true//eslint-disable-line
+        keep_fnames: true, //eslint-disable-line
       },
       compress: {
-        keep_fnames: true//eslint-disable-line
-      }
-    }
-  });
+        keep_fnames: true, //eslint-disable-line
+      },
+    },
+  })
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // This Grunt plugin is part of the default asset pipeline in Sails,
@@ -59,6 +58,4 @@ module.exports = function(grunt) {
   // grunt.loadNpmTasks('grunt-contrib-uglify');
   // ```
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-};
-
+}
