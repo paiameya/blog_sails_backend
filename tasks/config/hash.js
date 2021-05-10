@@ -24,12 +24,12 @@ module.exports = function (grunt) {
               require('util').inspect(source, { depth: null }) +
               '\nencoding: ' +
               require('util').inspect(encoding, { depth: null })
-          )
+          );
         }
         return require('crypto')
           .createHash('sha1')
           .update(source, encoding)
-          .digest('hex')
+          .digest('hex');
       },
     },
     js: {
@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       src: '.tmp/public/min/*.css',
       dest: '.tmp/public/hash/',
     },
-  })
+  });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // This Grunt plugin is part of the default asset pipeline in Sails,
@@ -65,4 +65,4 @@ module.exports = function (grunt) {
   // grunt.loadNpmTasks('grunt-hash');
   // ```
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-}
+};

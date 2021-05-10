@@ -33,7 +33,7 @@ module.exports = function (grunt) {
         keep_fnames: true, //eslint-disable-line
       },
     },
-  })
+  });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // This Grunt plugin is part of the default asset pipeline in Sails,
@@ -58,4 +58,4 @@ module.exports = function (grunt) {
   // grunt.loadNpmTasks('grunt-contrib-uglify');
   // ```
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-}
+};

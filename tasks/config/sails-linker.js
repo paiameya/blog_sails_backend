@@ -150,7 +150,7 @@ module.exports = function (grunt) {
         'views/**/*.ejs': ['.tmp/public/dist/*.css'],
       },
     },
-  }) //</ grunt.config.set() >
+  }); //</ grunt.config.set() >
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // This Grunt plugin is part of the default asset pipeline in Sails,
@@ -175,4 +175,4 @@ module.exports = function (grunt) {
   // grunt.loadNpmTasks('grunt-sails-linker');
   // ```
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-}
+};
