@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    session_token: { type: 'string', required: true },
+    sessionToken: { type: 'string', required: true },
     user: {
       model: 'user',
       required: true
