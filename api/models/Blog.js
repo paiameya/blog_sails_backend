@@ -20,7 +20,7 @@ module.exports = {
     },
     comments: {
       collection: 'comment',
-      via: 'blogId'
+      via: 'blog'
     },
     categories: {
       collection: 'category',
