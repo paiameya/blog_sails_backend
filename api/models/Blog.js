@@ -13,7 +13,7 @@ module.exports = {
     likes: { type: 'number', required: true },
     summary: { type: 'string', required: true },
     image: { type: 'string', required: true },
-    published_date: { type: 'number', required: true },
+    publishedDate: { type: 'number', required: true },
     user: {
       model: 'user',
       required: true

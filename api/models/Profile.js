@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    profile_pic: { type: 'string', required: true },
+    profilePicture: { type: 'string', required: true },
     user: {
       model: 'user',
       required: true
