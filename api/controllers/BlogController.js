@@ -20,7 +20,6 @@ module.exports = {
             const queryAuthor = await User.find({ name: author });
             userId = queryAuthor.flatMap(eachAuthor => eachAuthor.id)
         }
-        // Handling Sorting
 
         if (sortBy)
             result = await Blog.find({ 'category': categoryId, 'user': userId }).skip(offset).limit(limit).sort(`${sortBy} ${sortOrder}`)
