@@ -20,12 +20,10 @@ module.exports = {
     },
     comments: {
       collection: 'comment',
-      via: 'blogId'
+      via: 'blog'
     },
-    categories: {
-      collection: 'category',
-      via: 'blogs',
-      through: 'blogCategory'
+    category: {
+      model: 'category'
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

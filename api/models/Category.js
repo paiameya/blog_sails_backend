@@ -11,8 +11,7 @@ module.exports = {
     name: { type: 'string', required: true },
     blogs: {
       collection: 'blog',
-      via: 'categories',
-      through: 'blogCategory'
+      via: 'category',
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

@@ -8,6 +8,7 @@
 module.exports = {
 
   attributes: {
+    title: { type: 'string' },
     profilePicture: { type: 'string', required: true },
     user: {
       model: 'user',
