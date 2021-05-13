@@ -19,12 +19,16 @@ module.exports = {
             if (category && !Array.isArray(category)) { category = [category] }
             console.log("category...", category)
             if (category) {
-                var categoryItem, queryCategory
+
+                categoryItem = await Category.find({ name: "life" })
+                console.log(categoryItem, "something")
                 for (const eachCategory of category) {
-                    categoryItem = await Category.find({ name: eachCategory })
+                    console.log("coming inside")
+
                     categoryId.push(categoryItem.id)
+                    console.log(categoryId, "categoryId5")
                 }
-                console.log(categoryId)
+                console.log(categoryId, "categoryIds")
 
                 // categoryId = queryCategory.flatMap(eachCategory => eachCategory.id);
             }
@@ -35,9 +39,9 @@ module.exports = {
             }
 
             if (sortBy)
-                result = await Blog.find({ 'category': categoryId, 'user': userId }).skip(offset).limit(limit).sort(`${sortBy} ${sortOrder}`)
+                result = await Blog.find({ 'category': { in: categoryId }, 'user': userId }).skip(offset).limit(limit).sort(`${sortBy} ${sortOrder}`)
             else
-                result = await Blog.find({ 'category': categoryId, 'user': userId }).skip(offset).limit(limit)
+                result = await Blog.find({ 'category': { in: categoryId }, 'user': userId }).skip(offset).limit(limit)
 
             if (!result) { throw 'notFound'; }
 
