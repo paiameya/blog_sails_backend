@@ -22,10 +22,8 @@ module.exports = {
       collection: 'comment',
       via: 'blog'
     },
-    categories: {
-      collection: 'category',
-      via: 'blogs',
-      through: 'blogCategory'
+    category: {
+      model: 'category'
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
