@@ -16,11 +16,8 @@ module.exports = {
           select: ['name', 'email'],
         }).populate('profile');
         if (authorDetails) {
-          let title =
-            (authorDetails.profile && authorDetails.profile.title) || null;
-          let profilePicture =
-            (authorDetails.profile && authorDetails.profile.profilePicture) ||
-            null;
+          let title = authorDetails.profile?.title || null;
+          let profilePicture = authorDetails.profile?.profilePicture || null;
           delete authorDetails.profile;
           responseObj = { ...authorDetails, title, profilePicture };
           res.status(200).send(responseObj);
