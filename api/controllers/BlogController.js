@@ -9,25 +9,25 @@ module.exports = {
   getBlogDetails: async function (req, res) {
     try {
       let responseObj = {};
-      let { id } = req.params;
+      const { id } = req.params;
       let author = {};
       let name = null;
       let profilePic = null;
-      let categoryName = null;
+      const categoryName = null;
       if (id) {
-        let blog = await Blog.findOne({
+        const blog = await Blog.findOne({
           where: { id: id },
-          select: ['id', 'title', 'image', 'content', 'likes', 'publishedDate'],
+          select: ['id', 'title', 'image', 'content', 'likes', 'publishedDate']
         })
           .populate('authorId')
           .populate('categoryId');
 
         if (blog) {
-          let authorId = blog.authorId.id;
+          const authorId = blog.authorId.id;
 
-          let blogAuthor = await User.findOne({
+          const blogAuthor = await User.findOne({
             where: { id: authorId },
-            select: ['name'],
+            select: ['name']
           }).populate('profile');
           if (blogAuthor !== null) {
             name = blogAuthor.name || null;
@@ -59,11 +59,10 @@ module.exports = {
         limit = 5,
         author,
         sortBy,
-        sortOrder = 'DESC',
+        sortOrder = 'DESC'
       } = req.query;
       let authorId = [];
       let categoryId = [];
-      let result;
       let count = 0;
       let query = {};
       let sortQuery = {};
@@ -74,7 +73,7 @@ module.exports = {
         } else {
           category = category.map(item => item.trim().toLowerCase());
         }
-        let categoryItem = await Category.find({ name: { in: category } });
+        const categoryItem = await Category.find({ name: { in: category } });
         categoryId = categoryItem.map(item => item.id);
         query = { ...query, categoryId: { in: categoryId } };
       }
@@ -95,12 +94,12 @@ module.exports = {
         console.log('sortQuery', sortQuery);
       }
       count = await Blog.count(query);
-      result = await Blog.find({ where: query, ...sortQuery })
+      const result = await Blog.find({ where: query, ...sortQuery })
         .skip(offset)
         .limit(limit);
 
       if (!result) {
-        throw 'notFound';
+        throw new Error('notFound');
       }
       return res.status(200).send({ result, count });
     } catch (err) {
@@ -111,5 +110,5 @@ module.exports = {
           'We are currently unable to process your request. Please try after sometime.'
         );
     }
-  },
+  }
 };
