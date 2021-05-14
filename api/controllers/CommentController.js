@@ -11,6 +11,7 @@ module.exports = {
             const { id } = req.params;
             if (id) {
                 const comments = await Comment.find({ blogId: id })
+                const count = await Comment.count({ blogId: id })
                 if (!comments) {
                     res.status(400)
                         .send(
@@ -25,7 +26,7 @@ module.exports = {
                 })).reduce((a, b) => ({ ...a, ...b }), {})
                 if (userIds.length) {
                     const result = comments.map(item => ({ date: item.createdAt, message: item.text, profilePicture: item.profilePicture, user: userIds[item.userId] }))
-                    res.status(200).send(result)
+                    res.status(200).send(count, result)
                 } else {
                     res.status(400)
                         .send(
