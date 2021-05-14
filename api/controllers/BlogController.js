@@ -45,7 +45,7 @@ module.exports = {
 
                 }
                 else {
-                    res.status(409).send("Blog not found")
+                    res.status(404).send("Blog not found")
                 }
             }
 
