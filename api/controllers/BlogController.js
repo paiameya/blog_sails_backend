@@ -11,7 +11,6 @@ module.exports = {
       let responseObj = {};
       let { id } = req.params;
       let author = {};
-
       let name = null;
       let profilePic = null;
       let categoryName = null;
@@ -63,12 +62,12 @@ module.exports = {
         sortBy,
         sortOrder = 'DESC',
       } = req.query;
-      let authorId = [],
-        categoryId = [],
-        result,
-        count = 0,
-        query = {},
-        sortQuery = {};
+      let authorId = [];
+      let categoryId = [];
+      let result;
+      let count = 0;
+      let query = {};
+      let sortQuery = {};
 
       if (category) {
         if (!Array.isArray(category)) {
