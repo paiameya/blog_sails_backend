@@ -24,6 +24,8 @@ module.exports.routes = {
   'POST /signup': { action: 'auth/signup' },
   // login api
   'POST /login': { action: 'auth/login' },
+  //login via google
+  'POST /login/google': { action: 'auth/sso-login' },
 
 
   'GET /blog/:id': 'BlogController.getBlogDetails',
