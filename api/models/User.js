@@ -6,43 +6,37 @@
  */
 
 module.exports = {
-
   attributes: {
     name: { type: 'string', required: true },
     passwordHash: { type: 'string', required: true },
     email: { type: 'string', required: true },
     sessions: {
       collection: 'session',
-      via: "user"
+      via: 'user',
     },
     blogs: {
       collection: 'blog',
-      via: "user"
+      via: "authorId"
     },
     profile: {
       collection: 'profile',
-      via: 'user'
+      via: 'user',
     },
     comments: {
       collection: 'profile',
-      via: 'user'
-    }
+      via: 'user',
+    },
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
-
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
   },
-
 };
-
