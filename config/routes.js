@@ -24,7 +24,8 @@ module.exports.routes = {
   'POST /signup': { action: 'auth/signup' },
   // login api
   'POST /login': { action: 'auth/login' },
-
+  //logout api
+  'POST /logout': { action: 'auth/logout' },
 
   'GET /blog/:id': 'BlogController.getBlogDetails',
   'GET /author/:id': 'UserController.authorDetails',
