@@ -29,7 +29,7 @@
 // > Note: if you're using built-in LESS support with default settings,
 // > you'll want to change `assets/styles/importer.less` instead.
 //
-var cssFilesToInject = [
+const cssFilesToInject = [
   // Bring in `.css` files for themes and style guides (e.g. Bootstrap, Foundation)
   'dependencies/**/*.css',
 
