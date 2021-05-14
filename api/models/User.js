@@ -12,19 +12,19 @@ module.exports = {
     email: { type: 'string', required: true },
     sessions: {
       collection: 'session',
-      via: 'user',
+      via: 'user'
     },
     blogs: {
       collection: 'blog',
-      via: 'authorId',
+      via: 'authorId'
     },
     profile: {
-      model: 'profile',
+      model: 'profile'
     },
     comments: {
       collection: 'comment',
-      via: 'user',
-    },
+      via: 'user'
+    }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
@@ -37,5 +37,5 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-  },
+  }
 };
