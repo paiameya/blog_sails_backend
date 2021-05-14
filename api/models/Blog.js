@@ -23,7 +23,8 @@ module.exports = {
       via: 'blog'
     },
     categoryId: {
-      model: 'category'
+      model: 'category',
+      required: true
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

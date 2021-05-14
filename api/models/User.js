@@ -19,11 +19,11 @@ module.exports = {
       via: "authorId"
     },
     profile: {
-      collection: 'profile',
-      via: 'user',
+      model: 'profile'
+
     },
     comments: {
-      collection: 'profile',
+      collection: 'comment',
       via: 'user',
     },
 
