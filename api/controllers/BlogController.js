@@ -16,7 +16,7 @@ module.exports = {
 
             let name = null
             let profilePic = null
-            let categoryName = null
+            let category = null
             if (id) {
                 let blog = await Blog.findOne({ where: { id: id }, select: ['id', 'title', 'image', 'content', 'likes', 'publishedDate'] }).populate('authorId').populate('categoryId')
 
@@ -35,7 +35,7 @@ module.exports = {
                     if (blog.categoryId !== null) {
 
                         category = blog.categoryId.name
-                        responseObj = { ...responseObj, categoryName }
+
                     }
                     delete blog.authorId
                     delete blog.categoryId
