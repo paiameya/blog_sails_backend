@@ -8,11 +8,8 @@
 module.exports = {
 
   attributes: {
-    name: { type: 'string', required: true },
-    blogs: {
-      collection: 'blog',
-      via: 'category',
-    }
+    name: { type: 'string', required: true }
+
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝

@@ -14,7 +14,7 @@ module.exports = {
     summary: { type: 'string', required: true },
     image: { type: 'string', required: true },
     publishedDate: { type: 'number', required: true },
-    user: {
+    authorId: {
       model: 'user',
       required: true
     },
@@ -22,7 +22,7 @@ module.exports = {
       collection: 'comment',
       via: 'blog'
     },
-    category: {
+    categoryId: {
       model: 'category'
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
