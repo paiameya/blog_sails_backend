@@ -17,10 +17,10 @@ module.exports = function (grunt) {
         {
           cwd: './assets',
           src: ['**/*.!(coffee|less)'],
-          dest: '.tmp/public',
-        },
-      ],
-    },
+          dest: '.tmp/public'
+        }
+      ]
+    }
   });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
