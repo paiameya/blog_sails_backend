@@ -19,6 +19,7 @@ module.exports.routes = {
    ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
+  'POST /signup': { action: 'auth/signup' },
   'GET /blog/:id': 'BlogController.getBlogDetails',
   'GET /author/:id': 'UserController.authorDetails',
   '/blogs': 'BlogController.getBlogList',
