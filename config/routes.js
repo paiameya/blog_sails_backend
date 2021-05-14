@@ -20,10 +20,11 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
   'GET /blog/:id': 'BlogController.getBlogDetails',
+  'GET /blog/:id/comments': 'CommentController.getComments',
   'GET /author/:id': 'UserController.authorDetails',
   '/blogs': 'BlogController.getBlogList'
 
-  /***************************************************************************
+  /*************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
    * (See https://sailsjs.com/config/routes for examples.)                    *
