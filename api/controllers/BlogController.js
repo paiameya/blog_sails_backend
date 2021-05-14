@@ -7,12 +7,9 @@
 
 module.exports = {
     getBlogDetails: async function (req, res) {
-        //API  to fetch blogs 
-        //QueryParams: category,author,sortby,sortorder,limit,offset
-        //Responce : Blog list
         try {
-            let { category, offset = 0, limit = 5, author, sortBy, sortOrder = "ASC" } = req.query;
-            let authorId = [], categoryId = [], result, count = 0, query = {};
+            let { category, offset = 0, limit = 5, author, sortBy, sortOrder = "DESC" } = req.query;
+            let authorId = [], categoryId = [], result, count = 0, query = {}, sortQuery = {};
 
             if (category) {
                 if (!Array.isArray(category)) {
@@ -36,13 +33,19 @@ module.exports = {
                 authorId = userItem.map(item => item.id)
                 query = { ...query, authorId: { in: authorId } }
             }
+            if (sortBy) {
+                sortBy = sortBy.trim();
+                sortQuery = { sort: `${sortBy} ${sortOrder}` }
+                console.log("sortQuery", sortQuery)
+            }
             count = await Blog.count(query)
-            result = await Blog.find(query).skip(offset).limit(limit)
+            result = await Blog.find({ where: query, ...sortQuery }).skip(offset).limit(limit)
 
             if (!result) { throw 'notFound'; }
-            return res.status(200).json({ results: result, count: count });
+            return res.status(200).send({ result, count });
         }
         catch (err) {
+            console.log(err)
             return res
                 .status(500)
                 .send(
