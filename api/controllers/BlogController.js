@@ -22,7 +22,7 @@ module.exports = {
                 }
                 let categoryItem = await Category.find({ name: { in: category } })
                 categoryId = categoryItem.map(item => item.id)
-                query = { ...query, category: { in: categoryId } }
+                query = { ...query, categoryId: { in: categoryId } }
             }
 
             if (author) {
@@ -34,7 +34,7 @@ module.exports = {
                 }
                 const userItem = await User.find({ name: { in: author } })
                 authorId = userItem.map(item => item.id)
-                query = { ...query, author: { in: authorId } }
+                query = { ...query, authorId: { in: authorId } }
             }
             count = await Blog.count(query)
             result = await Blog.find(query).skip(offset).limit(limit)
