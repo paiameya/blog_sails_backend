@@ -5,8 +5,6 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
-const Category = require("../models/Category");
-
 module.exports = {
     getBlogDetails: async function (req, res) {
         //API  to fetch blogs 
@@ -14,38 +12,35 @@ module.exports = {
         //Responce : Blog list
         try {
             let { category, offset = 0, limit = 5, author, sortBy, sortOrder = "ASC" } = req.query;
-            let userId, categoryId = [], result;
-            console.log("...category", category)
-            if (category && !Array.isArray(category)) { category = [category] }
-            console.log("category...", category)
+            let authorId = [], categoryId = [], result, count = 0, query = {};
+
             if (category) {
-
-                categoryItem = await Category.find({ name: "life" })
-                console.log(categoryItem, "something")
-                for (const eachCategory of category) {
-                    console.log("coming inside")
-
-                    categoryId.push(categoryItem.id)
-                    console.log(categoryId, "categoryId5")
+                if (!Array.isArray(category)) {
+                    category = [category.trim().toLowerCase()]
+                } else {
+                    category = category.map(item => item.trim().toLowerCase())
                 }
-                console.log(categoryId, "categoryIds")
-
-                // categoryId = queryCategory.flatMap(eachCategory => eachCategory.id);
+                let categoryItem = await Category.find({ name: { in: category } })
+                categoryId = categoryItem.map(item => item.id)
+                query = { ...query, category: { in: categoryId } }
             }
 
             if (author) {
-                const queryAuthor = await User.find({ name: author });
-                userId = queryAuthor.flatMap(eachAuthor => eachAuthor.id)
+                if (!Array.isArray(author)) {
+                    author = [author.trim().toLowerCase()]
+                }
+                else {
+                    author = author.map(item => item.trim().toLowerCase())
+                }
+                const userItem = await User.find({ name: { in: author } })
+                authorId = userItem.map(item => item.id)
+                query = { ...query, author: { in: authorId } }
             }
-
-            if (sortBy)
-                result = await Blog.find({ 'category': { in: categoryId }, 'user': userId }).skip(offset).limit(limit).sort(`${sortBy} ${sortOrder}`)
-            else
-                result = await Blog.find({ 'category': { in: categoryId }, 'user': userId }).skip(offset).limit(limit)
+            count = await Blog.count(query)
+            result = await Blog.find(query).skip(offset).limit(limit)
 
             if (!result) { throw 'notFound'; }
-
-            return res.status(200).json({ responce: result });
+            return res.status(200).json({ results: result, count: count });
         }
         catch (err) {
             return res
