@@ -29,10 +29,10 @@ module.exports = {
             where: { id: authorId },
             select: ['name'],
           }).populate('profile');
-
           if (blogAuthor !== null) {
             name = blogAuthor.name || null;
-            profilePic = blogAuthor.profile.profilePicture || null;
+            profilePic =
+              (blogAuthor.profile && blogAuthor.profile.profilePicture) || null;
             author = { name, profilePic };
           }
           if (blog.categoryId !== null) {
