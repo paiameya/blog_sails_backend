@@ -16,7 +16,7 @@ module.exports = {
     },
     blogs: {
       collection: 'blog',
-      via: 'user',
+      via: "authorId"
     },
     profile: {
       collection: 'profile',
