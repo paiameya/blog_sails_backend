@@ -20,6 +20,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
+  'GET /author/:id': 'UserController.authorDetails'
   '/blogs': 'BlogController.getBlogDetails'
 
   /***************************************************************************
