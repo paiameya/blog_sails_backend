@@ -16,11 +16,10 @@ module.exports = {
     },
     blogs: {
       collection: 'blog',
-      via: "authorId"
+      via: 'authorId',
     },
     profile: {
-      model: 'profile'
-
+      model: 'profile',
     },
     comments: {
       collection: 'comment',
