@@ -8,16 +8,16 @@
 module.exports = {
   authorDetails: async function (req, res) {
     try {
-      let { id } = req.params;
+      const { id } = req.params;
       let responseObj = {};
       if (id) {
-        let authorDetails = await User.findOne({
+        const authorDetails = await User.findOne({
           where: { id: id },
-          select: ['name', 'email'],
+          select: ['name', 'email']
         }).populate('profile');
         if (authorDetails) {
-          let title = authorDetails.profile?.title || null;
-          let profilePicture = authorDetails.profile?.profilePicture || null;
+          const title = authorDetails.profile?.title || null;
+          const profilePicture = authorDetails.profile?.profilePicture || null;
           delete authorDetails.profile;
           responseObj = { ...authorDetails, title, profilePicture };
           res.status(200).send(responseObj);
@@ -29,5 +29,5 @@ module.exports = {
       console.log('err', err);
       res.status(500).json('Something went wrong');
     }
-  },
+  }
 };
