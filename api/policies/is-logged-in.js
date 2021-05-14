@@ -3,7 +3,6 @@ module.exports = async function (req, res, proceed) {
     if (token === undefined) return res.forbidden();
     let session = await Session.findOne({ sessionToken: token, status: 1 }).populate('user')
     if (session && session.user !== null) {
-        console.log("session", session)
         return proceed();
     }
     return res.forbidden();
