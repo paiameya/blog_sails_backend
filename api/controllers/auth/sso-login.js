@@ -22,7 +22,12 @@ module.exports = {
       description:
         'Google signin successful, and requesting user agent is now logged in.',
     },
-
+    success: {
+      description: "Successful log in"
+    },
+    userNotFound: {
+      description: `The provided email user not in the database.`
+    },
     invalidToken: {
       description:
         'The provided google token is invalid, expired, or has already been used.',
@@ -74,26 +79,32 @@ module.exports = {
 
     // Look up the user with this reset token.
     var userRecord = await User.findOne({
-      emailAddress: googleUserDetails.email,
+      email: googleUserDetails.email,
     });
 
+
     if (userRecord) {
-      // Log the user in.
-      // (This will be persisted when the response is sent.)
-      this.req.session.userId = userRecord.id;
-      return;
+      let session = await Session.create({
+        user: userRecord.id,
+        sessionToken: token,
+        expiresAt: Date.now() + 1000 * (60 * 5),
+        status: 1
+      }).fetch()
+      let userId = userRecord.id
+      let sessionToken = session.sessionToken
+
+      return exits.success({ userId, sessionToken })
+
+    }
+    else {
+      return exits.userNotFound("User not found");
     }
 
 
-    let session = await Session.create({
-      user: userRecord.id,
-      sessionToken: token,
-      expiresAt: Date.now() + 1000 * (60 * 5),
-      status: 1
-    }).fetch()
+
 
     // Store the user's new id in their session.
-    this.req.session.userId = newUserRecord.id;
+    //this.req.session.userId = newUserRecord.id;
   }
 
 };
