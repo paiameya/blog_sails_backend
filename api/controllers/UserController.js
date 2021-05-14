@@ -21,7 +21,7 @@ module.exports = {
                     res.status(200).send(responseObj)
                 }
                 else {
-                    res.status(409).send("Author not found")
+                    res.status(404).send("Author not found")
                 }
             }
         }
