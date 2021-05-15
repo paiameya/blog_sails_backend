@@ -1,3 +1,4 @@
+const axios = require('axios');
 module.exports = {
 
 
@@ -22,9 +23,6 @@ module.exports = {
       description:
         'Google signin successful, and requesting user agent is now logged in.',
     },
-    success: {
-      description: "Successful log in"
-    },
     userNotFound: {
       description: `The provided email user not in the database.`
     },
@@ -48,9 +46,7 @@ module.exports = {
   },
 
 
-  fn: async function (inputs) {
-
-    const axios = require('axios');
+  fn: async function (inputs, exits) {
 
     if (!inputs.tokenId) {
       throw 'invalidToken';
@@ -72,12 +68,12 @@ module.exports = {
       !googleOAuthResponse &&
       (!googleOAuthResponse.status !== 200 || !googleOAuthResponse.data)
     ) {
-      throw 'invalidToken';
+      return exits.invalidToken("Invalid token")
     }
 
     const googleUserDetails = googleOAuthResponse.data;
 
-    // Look up the user with this reset token.
+
     var userRecord = await User.findOne({
       email: googleUserDetails.email,
     });
@@ -99,12 +95,6 @@ module.exports = {
     else {
       return exits.userNotFound("User not found");
     }
-
-
-
-
-    // Store the user's new id in their session.
-    //this.req.session.userId = newUserRecord.id;
   }
 
 };
