@@ -9,7 +9,11 @@ module.exports = {
   attributes: {
     title: { type: 'string' },
     profilePicture: { type: 'string', required: true },
-    bio: { type: 'string' }
+    bio: { type: 'string' },
+    userId: {
+      model: 'user',
+      required: true
+    }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
