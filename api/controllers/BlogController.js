@@ -59,7 +59,8 @@ module.exports = {
         limit = 5,
         author,
         sortBy,
-        sortOrder = 'DESC'
+        sortOrder = 'DESC',
+        search = ''
       } = req.query;
       let authorId = [];
       let categoryId = [];
@@ -88,13 +89,14 @@ module.exports = {
         authorId = userItem.map(item => item.id);
         query = { ...query, authorId: { in: authorId } };
       }
+
       if (sortBy) {
         sortBy = sortBy.trim();
         sortQuery = { sort: `${sortBy} ${sortOrder}` };
         console.log('sortQuery', sortQuery);
       }
-      count = await Blog.count(query);
-      const result = await Blog.find({ where: query, ...sortQuery })
+      count = await Blog.count({ where: { ...query, title: { contains: search } } })
+      const result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } })
         .skip(offset)
         .limit(limit);
 
