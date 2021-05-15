@@ -23,10 +23,7 @@ module.exports = {
       model: 'profile'
 
     },
-    comments: {
-      collection: 'comment',
-      via: 'user',
-    },
+
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

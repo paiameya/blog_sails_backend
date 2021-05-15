@@ -18,10 +18,7 @@ module.exports = {
       model: 'user',
       required: true
     },
-    comments: {
-      collection: 'comment',
-      via: 'blog'
-    },
+
     categoryId: {
       model: 'category',
       required: true
