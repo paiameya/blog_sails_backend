@@ -4,7 +4,8 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-
+const sanitizeHtml = require('sanitize-html');
+const Filter = require('bad-words');
 module.exports = {
     getComments: async function (req, res) {
         try {
@@ -50,8 +51,11 @@ module.exports = {
                 res.status(400).send("User is not authenticated")
             }
             if (req.body) {
-                if (req.body.text)
-                    result = { userId: req.me.id, blogId: id, text: req.body.text }
+                if (req.body.text) {
+                    filter = new Filter();
+                    const sanitizedComment = sanitizeHtml(filter.clean(req.body.text), { allowedTags: [] })
+                    result = { userId: req.me.id, blogId: id, text: sanitizedComment }
+                }
                 else
                     res.status(400).send("No comments Added")
                 res.status(200).send(result)
