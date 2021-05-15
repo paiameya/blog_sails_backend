@@ -40,5 +40,28 @@ module.exports = {
             console.log('*****err****', err);
             res.status(500).send(err);
         }
+    },
+
+    postComment: async function (req, res) {
+        try {
+            let result = {}
+            const { id } = req.params;
+            if (!req.me) {
+                res.status(400).send("User is not authenticated")
+            }
+            if (req.body) {
+                if (req.body.text)
+                    result = { userId: req.me.id, blogId: id, text: req.body.text }
+                else
+                    res.status(400).send("No comments Added")
+                res.status(200).send(result)
+            } else {
+                res.status(400).send("No comments Added")
+            }
+        }
+        catch (err) {
+            console.log('*****err****', err);
+            res.status(500).send(err);
+        }
     }
 };

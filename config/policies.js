@@ -18,5 +18,7 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
-
+  'CommentController': {
+    'postComment': 'is-logged-in'
+  }
 };

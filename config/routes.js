@@ -21,6 +21,7 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
   'GET /blog/:id': 'BlogController.getBlogDetails',
   'GET /blog/:id/comments': 'CommentController.getComments',
+  'POST /blog/:id/comment': 'CommentController.postComment',
   'GET /author/:id': 'UserController.authorDetails',
   '/blogs': 'BlogController.getBlogList'
 
