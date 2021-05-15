@@ -21,10 +21,7 @@ module.exports = {
     profile: {
       model: 'profile'
     },
-    comments: {
-      collection: 'comment',
-      via: 'user'
-    }
+
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

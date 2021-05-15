@@ -9,7 +9,8 @@ module.exports = {
   attributes: {
     title: { type: 'string' },
     profilePicture: { type: 'string', required: true },
-    bio: { type: 'string' }
+    bio: { type: 'string' },
+    user: { model: 'user' }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
