@@ -19,7 +19,7 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    let session = await Session.update({ sessionToken: token, status: 1 }).set({ status: 0 })
+    let session = await Session.update({ sessionToken: this.req.sessionToken, status: 1 }).set({ status: 0 })
     if (session)
       return "Successfully Logged Out"
 
