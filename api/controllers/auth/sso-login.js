@@ -83,6 +83,7 @@ module.exports = {
 
     if (!userRecord) {
 
+
       let salt = crypto.randomBytes(10).toString("hex")
       const hash = crypto.createHmac("sha256", salt)
 
