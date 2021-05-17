@@ -13,20 +13,15 @@ module.exports = {
     salt: { type: 'string' },
     sessions: {
       collection: 'session',
-      via: 'user',
+      via: 'user'
     },
     blogs: {
       collection: 'blog',
-      via: "authorId"
+      via: 'authorId'
     },
     profile: {
       model: 'profile'
-
-    },
-    comments: {
-      collection: 'comment',
-      via: 'user',
-    },
+    }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
@@ -39,5 +34,5 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-  },
+  }
 };
