@@ -98,8 +98,16 @@ module.exports = {
 
 
     }
+    let token = jwt.sign({
+      data: {
+        id: userRecord.id,
+        email: userRecord.email,
+        timestamp: Date.now()
+      }
+    }, sails.config.locals.secret, {
+      expiresIn: Date.now() + 1000 * (60 * 5)
+    })
 
-    let token = crypto.randomBytes(10).toString("hex");
     let session = await Session.create({
       user: userRecord.id,
       sessionToken: token,

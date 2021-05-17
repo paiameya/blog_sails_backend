@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const jwt = require("jsonwebtoken")
 module.exports = {
 
 
@@ -54,8 +55,17 @@ module.exports = {
 
     hash.update(inputs.password);
     let password = hash.digest("hex").toString("hex");
+
     if (userRecord.passwordHash === password) {
-      let token = crypto.randomBytes(10).toString("hex");
+      let token = jwt.sign({
+        data: {
+          id: userRecord.id,
+          email: userRecord.email,
+          timestamp: Date.now()
+        }
+      }, sails.config.locals.secret, {
+        expiresIn: Date.now() + 1000 * (60 * 5)
+      })
       let session = await Session.create({
         user: userRecord.id,
         sessionToken: token,
