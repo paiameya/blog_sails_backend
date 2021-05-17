@@ -16,7 +16,8 @@
     "sails-hook-orm": "^3.0.2",
     "sails-hook-sockets": "^2.0.0",
     "sails-mongo": "^2.0.0",
-    "sanitize-html": "^2.3.3"
+    "sanitize-html": "^2.3.3",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "5.16.0",

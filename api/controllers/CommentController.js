@@ -39,9 +39,7 @@ module.exports = {
                         )
                 }
             }
-        }
-
-        catch (err) {
+        } catch (err) {
             console.log('*****err****', err);
             res.status(500).send(err);
         }
@@ -52,22 +50,21 @@ module.exports = {
             let result = {}
             const { id } = req.params;
             if (!req.me) {
-                res.status(400).send("User is not authenticated")
+                res.status(400).send('User is not authenticated')
             }
             if (req.body) {
                 if (req.body.text) {
                     filter = new Filter();
-                    const sanitizedComment = sanitizeHtml(filter.clean(req.body.text), { allowedTags: [] })
-                    result = { userId: req.me.id, blogId: id, text: sanitizedComment }
-                }
-                else
-                    res.status(400).send("No comments Added")
-                res.status(200).send(result)
+                    const sanitizedComment = sanitizeHtml(filter.clean(req.body.text), {
+                        allowedTags: []
+                    });
+                    result = { userId: req.me.id, blogId: id, text: sanitizedComment };
+                } else res.status(400).send('No comments Added');
+                res.status(200).send(result);
             } else {
-                res.status(400).send("No comments Added")
+                res.status(400).send('No comments Added');
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.log('*****err****', err);
             res.status(500).send(err);
         }
