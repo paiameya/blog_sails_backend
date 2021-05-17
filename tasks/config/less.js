@@ -18,10 +18,10 @@ module.exports = function (grunt) {
           cwd: 'assets/styles/',
           src: ['importer.less'],
           dest: '.tmp/public/styles/',
-          ext: '.css',
-        },
-      ],
-    },
+          ext: '.css'
+        }
+      ]
+    }
   });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -22,7 +22,6 @@ module.exports = {
     let session = await Session.update({ sessionToken: this.req.sessionToken, status: 1 }).set({ status: 0 })
     if (session)
       return "Successfully Logged Out"
-
   }
 
 
