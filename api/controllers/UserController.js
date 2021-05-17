@@ -16,10 +16,10 @@ module.exports = {
           select: ['name', 'email']
         }).populate('profile');
         if (authorDetails) {
-          const title = authorDetails.profile?.title || null;
+          const bio = authorDetails.profile?.bio || null;
           const profilePicture = authorDetails.profile?.profilePicture || null;
           delete authorDetails.profile;
-          responseObj = { ...authorDetails, title, profilePicture };
+          responseObj = { ...authorDetails, bio, profilePicture };
           res.status(200).send(responseObj);
         } else {
           res.status(404).send('Author not found');

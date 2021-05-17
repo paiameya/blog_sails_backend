@@ -9,7 +9,8 @@ module.exports = {
   attributes: {
     name: { type: 'string', required: true },
     passwordHash: { type: 'string', required: true },
-    email: { type: 'string', required: true },
+    email: { type: 'string', unique: true, required: true },
+    salt: { type: 'string' },
     sessions: {
       collection: 'session',
       via: 'user'
@@ -20,7 +21,7 @@ module.exports = {
     },
     profile: {
       model: 'profile'
-    },
+    }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗

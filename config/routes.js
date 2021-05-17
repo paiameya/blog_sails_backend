@@ -19,11 +19,19 @@ module.exports.routes = {
    ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
+  //signup api
+  'POST /signup': { action: 'auth/signup' },
+  //login via google
+  'POST /login/google': { action: 'auth/sso-login' },
+  // login api
+  'POST /login': { action: 'auth/login' },
+  //logout api
+  'POST /logout': { action: 'auth/logout' },
   'GET /blog/:id': 'BlogController.getBlogDetails',
   'GET /blog/:id/comments': 'CommentController.getComments',
   'POST /blog/:id/comment': 'CommentController.postComment',
   'GET /author/:id': 'UserController.authorDetails',
-  '/blogs': 'BlogController.getBlogList'
+  '/blogs': 'BlogController.getBlogList',
 
   /*************************************************************************
    *                                                                          *
