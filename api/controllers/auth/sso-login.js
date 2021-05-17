@@ -1,4 +1,6 @@
 const axios = require('axios');
+const crypto = require("crypto")
+const { v4: uuidv4 } = require('uuid')
 module.exports = {
 
 
@@ -79,22 +81,32 @@ module.exports = {
     });
 
 
-    if (userRecord) {
-      let session = await Session.create({
-        user: userRecord.id,
-        sessionToken: token,
-        expiresAt: Date.now() + 1000 * (60 * 5),
-        status: 1
-      }).fetch()
-      let userId = userRecord.id
-      let sessionToken = session.sessionToken
+    if (!userRecord) {
 
-      return exits.success({ userId, sessionToken })
+      let salt = crypto.randomBytes(10).toString("hex")
+      const hash = crypto.createHmac("sha256", salt)
+
+      password = hash.digest("hex").toString("hex")
+
+      userRecord = await User.create({
+        name: googleUserDetails.email.split('@')[0],
+        email: googleUserDetails.email,
+        passwordHash: uuidv4() || "password",
+        salt: salt,
+      })
+
 
     }
-    else {
-      return exits.userNotFound("User not found");
-    }
+
+    let token = crypto.randomBytes(10).toString("hex");
+    let session = await Session.create({
+      user: userRecord.id,
+      sessionToken: token,
+      expiresAt: Date.now() + 1000 * (60 * 5),
+      status: 1
+    }).fetch()
+
+    return this.res.status(200).send({ userId: userRecord.id, sessionToken: session.sessionToken });
   }
 
 };
