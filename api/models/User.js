@@ -10,22 +10,18 @@ module.exports = {
     name: { type: 'string', required: true },
     passwordHash: { type: 'string', required: true },
     email: { type: 'string', unique: true, required: true },
-    salt: { type: 'string', required: true },
+    salt: { type: 'string' },
     sessions: {
       collection: 'session',
-      via: 'user',
+      via: 'user'
     },
     blogs: {
       collection: 'blog',
-      via: 'authorId',
+      via: 'authorId'
     },
     profile: {
-      model: 'profile',
-    },
-    comments: {
-      collection: 'comment',
-      via: 'user',
-    },
+      model: 'profile'
+    }
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
@@ -38,5 +34,5 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-  },
+  }
 };

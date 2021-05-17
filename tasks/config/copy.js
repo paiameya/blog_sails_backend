@@ -17,9 +17,9 @@ module.exports = function (grunt) {
           expand: true,
           cwd: './assets',
           src: ['**/*.!(coffee|less)'],
-          dest: '.tmp/public',
-        },
-      ],
+          dest: '.tmp/public'
+        }
+      ]
     },
     build: {
       files: [
@@ -27,9 +27,9 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '.tmp/public',
           src: ['**/*'],
-          dest: 'www',
-        },
-      ],
+          dest: 'www'
+        }
+      ]
     },
     beforeLinkBuildProd: {
       files: [
@@ -37,10 +37,10 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '.tmp/public/hash',
           src: ['**/*'],
-          dest: '.tmp/public/dist',
-        },
-      ],
-    },
+          dest: '.tmp/public/dist'
+        }
+      ]
+    }
   });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

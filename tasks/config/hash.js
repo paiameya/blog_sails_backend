@@ -30,16 +30,16 @@ module.exports = function (grunt) {
           .createHash('sha1')
           .update(source, encoding)
           .digest('hex');
-      },
+      }
     },
     js: {
       src: '.tmp/public/min/*.js',
-      dest: '.tmp/public/hash/',
+      dest: '.tmp/public/hash/'
     },
     css: {
       src: '.tmp/public/min/*.css',
-      dest: '.tmp/public/hash/',
-    },
+      dest: '.tmp/public/hash/'
+    }
   });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

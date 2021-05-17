@@ -19,7 +19,12 @@ module.exports.routes = {
    ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
+  //signup api
   'POST /signup': { action: 'auth/signup' },
+  //login via google
+  'POST /login/google': { action: 'auth/sso-login' },
+  // login api
+  'POST /login': { action: 'auth/login' },
   'GET /blog/:id': 'BlogController.getBlogDetails',
   'GET /author/:id': 'UserController.authorDetails',
   '/blogs': 'BlogController.getBlogList',

@@ -6,7 +6,6 @@
  */
 
 module.exports = {
-
   attributes: {
     content: { type: 'string', required: true },
     title: { type: 'string', required: true },
@@ -18,10 +17,6 @@ module.exports = {
       model: 'user',
       required: true
     },
-    comments: {
-      collection: 'comment',
-      via: 'blog'
-    },
     categoryId: {
       model: 'category',
       required: true
@@ -30,17 +25,12 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
-
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
-  },
-
+  }
 };
-

@@ -20,8 +20,8 @@ module.exports = function (grunt) {
       'www/js',
       'www/styles',
       'www/templates',
-      'www/dependencies',
-    ],
+      'www/dependencies'
+    ]
   });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
