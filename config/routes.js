@@ -25,9 +25,6 @@ module.exports.routes = {
   'POST /login/google': { action: 'auth/sso-login' },
   // login api
   'POST /login': { action: 'auth/login' },
-
-
-
   'GET /blog/:id': 'BlogController.getBlogDetails',
   'GET /author/:id': 'UserController.authorDetails',
   '/blogs': 'BlogController.getBlogList',
