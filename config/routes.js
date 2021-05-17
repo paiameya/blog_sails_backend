@@ -22,10 +22,11 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
   //signup api
   'POST /signup': { action: 'auth/signup' },
-  // login api
-  'POST /login': { action: 'auth/login' },
   //login via google
   'POST /login/google': { action: 'auth/sso-login' },
+  // login api
+  'POST /login': { action: 'auth/login' },
+
 
 
   'GET /blog/:id': 'BlogController.getBlogDetails',
