@@ -9,7 +9,6 @@ module.exports = {
   attributes: {
     content: { type: 'string', required: true },
     title: { type: 'string', required: true },
-    likes: { type: 'number', required: true },
     summary: { type: 'string', required: true },
     image: { type: 'string', required: true },
     publishedDate: { type: 'number', required: true },
@@ -20,6 +19,10 @@ module.exports = {
     categoryId: {
       model: 'category',
       required: true
+    },
+    like: {
+      collection: 'like',
+      via: 'blogId'
     }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
