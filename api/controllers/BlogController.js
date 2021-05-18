@@ -96,16 +96,21 @@ module.exports = {
         console.log('sortQuery', sortQuery);
       }
       count = await Blog.count({ where: { ...query, title: { contains: search } } })
-      let result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } })
-        .skip(offset)
-        .limit(limit);
-      const uniqUserIds = [...new Set(result.map(b => b.authorId))]
-      console.log("uniquserIds", uniqUserIds)
-      const users = await User.find({ id: { in: uniqUserIds } }).populate('profile')
-      console.log("users", users)
-      const usersObj = users.map(u => ({ [u.id]: { name: u.name, profilePic: u.profile.profilePicture } })).reduce((a, b) => ({ ...a, ...b }), {})
-      result.forEach(element => {
-        element.author = usersObj[element.authorId]
+      let result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } }).populate('like', { where: { review: 1 } }).skip(offset)
+        .limit(limit)
+        .then(function (blogs) {
+          blogs.forEach(function (blog) {
+            blog.likes = blog.like.length;
+            delete blog.like
+          });
+          return blogs
+        });
+
+      const users = [...new Set(result.map(b => b.authorId))]
+      let authorList = await User.find({ id: { in: users } }).populate('profile')
+      authorList = authorList.map(_user => ({ [_user.id]: { name: _user.name, profilePic: _user.profile.profilePicture } })).reduce((a, b) => ({ ...a, ...b }), {})
+      result.forEach(blog => {
+        blog.author = authorList[blog.authorId]
       });
       if (!result) {
         throw new Error('notFound');
