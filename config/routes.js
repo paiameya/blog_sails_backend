@@ -32,7 +32,9 @@ module.exports.routes = {
   'POST /blog/:id/comment': 'CommentController.postComment',
   'GET /author/:id': 'UserController.authorDetails',
   '/blogs': 'BlogController.getBlogList',
-
+  'GET /blog/:id/like': 'LikeController.getTotalLikesForBlog',
+  'GET /blog/:id/like/user/:userId': 'LikeController.getUserLikes',
+  'PATCH /blog/:id/like/user/:userId': 'LikeController.putLikes'
   /*************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
