@@ -17,7 +17,7 @@ module.exports = {
       if (id) {
         const blog = await Blog.findOne({
           where: { id: id },
-          select: ['id', 'title', 'image', 'content', 'likes', 'publishedDate']
+          select: ['id', 'title', 'image', 'content', 'publishedDate']
         })
           .populate('authorId')
           .populate('categoryId');
@@ -96,10 +96,17 @@ module.exports = {
         console.log('sortQuery', sortQuery);
       }
       count = await Blog.count({ where: { ...query, title: { contains: search } } })
-      const result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } })
+      let result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } })
         .skip(offset)
         .limit(limit);
-
+      const uniqUserIds = [...new Set(result.map(b => b.authorId))]
+      console.log("uniquserIds", uniqUserIds)
+      const users = await User.find({ id: { in: uniqUserIds } }).populate('profile')
+      console.log("users", users)
+      const usersObj = users.map(u => ({ [u.id]: { name: u.name, profilePic: u.profile.profilePicture } })).reduce((a, b) => ({ ...a, ...b }), {})
+      result.forEach(element => {
+        element.author = usersObj[element.authorId]
+      });
       if (!result) {
         throw new Error('notFound');
       }
