@@ -95,8 +95,11 @@ module.exports = {
         sortQuery = { sort: `${sortBy} ${sortOrder}` };
         console.log('sortQuery', sortQuery);
       }
-      count = await Blog.count({ where: { ...query, title: { contains: search } } })
-      const result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } })
+      count = await Blog.count({
+        where: { ...query, title: { contains: search } }
+      });
+      const result = await Blog.find({ where: query, ...sortQuery })
+        .where({ title: { contains: search } })
         .skip(offset)
         .limit(limit);
 
