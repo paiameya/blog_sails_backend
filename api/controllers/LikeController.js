@@ -38,37 +38,28 @@ module.exports = {
         try {
             const { review } = req.body;
             const { id, userId } = req.params;
-            if (!([1, 0, -1].includes(review)))
-                return res.status(400).send("invalid review provided")
+            if (![1, 0, -1].includes(review))
+                return res.status(400).send('invalid review provided');
 
-            await Like.findOrCreate({ blogId: id, userId: userId }, { blogId: id, userId, review: review })
-                .exec(async (err, like, wasCreated) => {
-                    if (err) { return res.serverError(err); }
+            let like = await Like.findOne({ blogId: id, userId: userId });
 
-                    if (wasCreated) {
-                        if (like.review === 1) {
-                            const blog = await Blog.findOne({ id })
-                            await Blog.update({ id }).set({ likeCount: blog.likeCount + 1 });
-                        }
-                        res.status(200).send(like)
-                    }
-                    else {
-                        if (like.review != review) {
-                            let inc = 0
-                            if (like.review === 1)
-                                inc = -1
-                            else
-                                if (review === 1)
-                                    inc = 1
-                            const blog = await Blog.findOne({ id })
-                            await Blog.update({ id }).set({ likeCount: blog.likeCount + inc });
-                        }
-                        const updatedReview = await Like.updateOne({ blogId: id, userId: userId }).set({ review: review });
-                        res.status(200).send(updatedReview)
-                    }
-                });
-        }
-        catch (err) {
+            const blog = await Blog.findOne({ id });
+            let likeCount = blog.likeCount;
+            if (!like) {
+                like = await Like.create({ blogId: id, userId: userId, review });
+                if (review === 1) likeCount++;
+            } else {
+                if (like.review !== review) {
+                    if (review === 1) likeCount++;
+                    else if (like.review === 1) likeCount--;
+                    await Like.update({ id: like.id }).set({ review });
+                }
+            }
+            if (likeCount !== blog.likeCount)
+                await Blog.update({ id }).set({ likeCount });
+
+            res.status(200).send({ like, blog: await Blog.findOne({ id }) });
+        } catch (err) {
             sails.log(err);
             res.status(500).send(err);
         }
