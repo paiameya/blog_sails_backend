@@ -17,7 +17,7 @@ module.exports = {
       if (id) {
         const blog = await Blog.findOne({
           where: { id: id },
-          select: ['id', 'title', 'image', 'content', 'publishedDate']
+          select: ['id', 'title', 'image', 'content', 'publishedDate','likeCount']
         })
           .populate('authorId')
           .populate('categoryId');
