@@ -81,7 +81,7 @@ module.exports = {
         email: googleUserDetails.email,
         passwordHash: uuidv4() || 'password',
         salt: salt
-      });
+      }).fetch()
     }
 
     const token = crypto.randomBytes(10).toString('hex');
