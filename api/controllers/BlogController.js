@@ -98,11 +98,20 @@ module.exports = {
       count = await Blog.count({ where: { ...query, title: { contains: search } } })
       let result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } }).skip(offset).limit(limit)
 
-      const users = [...new Set(result.map(b => b.authorId))]
-      let authorList = await User.find({ id: { in: users } }).populate('profile')
-      authorList = authorList.map(_user => ({ [_user.id]: { name: _user.name, profilePic: _user.profile.profilePicture } })).reduce((a, b) => ({ ...a, ...b }), {})
+      const users = [...new Set(result.map(b => b.authorId))];
+      let authorList = await User.find({ id: { in: users } }).populate(
+        'profile'
+      );
+      authorList = authorList
+        .map(_user => ({
+          [_user.id]: {
+            name: _user.name,
+            profilePic: _user.profile.profilePicture
+          }
+        }))
+        .reduce((a, b) => ({ ...a, ...b }), {});
       result.forEach(blog => {
-        blog.author = authorList[blog.authorId]
+        blog.author = authorList[blog.authorId];
       });
       if (!result) {
         throw new Error('notFound');

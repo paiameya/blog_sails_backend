@@ -6,7 +6,6 @@
  */
 
 module.exports = {
-
   attributes: {
     userId: {
       model: 'user',
@@ -14,10 +13,9 @@ module.exports = {
     },
     blogId: {
       model: 'blog',
-      required: true,
+      required: true
     },
     review: {
-
       defaultsTo: 0,
       // 0-Rating has been removed ,1-thumbs up,-1-thumbs down
       type: 'number'
@@ -26,17 +24,12 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
-
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
-  },
-
+  }
 };
-

@@ -19,13 +19,13 @@ module.exports.routes = {
    ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  //signup api
+  // signup api
   'POST /signup': { action: 'auth/signup' },
-  //login via google
+  // login via google
   'POST /login/google': { action: 'auth/sso-login' },
   // login api
   'POST /login': { action: 'auth/login' },
-  //logout api
+  // logout api
   'POST /logout': { action: 'auth/logout' },
   'GET /blog/:id': 'BlogController.getBlogDetails',
   'GET /blog/:id/comments': 'CommentController.getComments',

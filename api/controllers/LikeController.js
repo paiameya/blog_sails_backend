@@ -5,7 +5,6 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
-
 module.exports = {
     getTotalLikesForBlog: async function (req, res) {
         try {
@@ -70,11 +69,19 @@ module.exports = {
                 });
         }
 
-        catch (err) {
-            sails.log(err);
-            res.status(500).send(err)
+        if (wasCreated) {
+            res.status(200).send(like);
+        } else {
+            const updatedReview = await Like.updateOne({
+                blogId: id,
+                userId: userId
+            }).set({ review: review });
+            res.status(200).send(updatedReview);
         }
-    }
-
+    });
+} catch (err) {
+    sails.log(err);
+    res.status(500).send(err);
+}
+  }
 };
-
