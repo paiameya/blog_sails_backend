@@ -35,7 +35,7 @@ module.exports = {
             author = { name, profilePic };
           }
           if (blog.categoryId !== null) {
-            category = blog.categoryId.name;
+            category = { id: blog.categoryId.id, name: blog.categoryId.name };
             responseObj = { ...responseObj, categoryName };
           }
           delete blog.authorId;
