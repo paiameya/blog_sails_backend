@@ -7,16 +7,15 @@ module.exports = {
 
   exits: {
     success: {
-      description: "Successfully logged out"
+      description: 'Successfully logged out'
     }
   },
 
-
-
-
-  fn: async function (inputs, exits) {
-
-    let session = await Session.update({ sessionToken: this.req.sessionToken, status: 1 }).set({ status: 0 })
-    this.res.status(200).send("Successfully logged out");
+  fn: async function () {
+    await Session.update({
+      sessionToken: this.req.sessionToken,
+      status: 1
+    }).set({ status: 0 });
+    this.res.status(200).send('Successfully logged out');
   }
 };

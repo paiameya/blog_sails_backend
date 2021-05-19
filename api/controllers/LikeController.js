@@ -46,9 +46,9 @@ module.exports = {
       const { id } = req.params;
       const userId = req.me.id;
       console.log(review, id, 48);
-      if (![1, 0, -1].includes(review))
+      if (![1, 0, -1].includes(review)) {
         return res.status(400).send('invalid review provided');
-
+      }
       let like = await Like.findOne({ blogId: id, userId: userId });
 
       const blog = await Blog.findOne({ id });
@@ -64,8 +64,9 @@ module.exports = {
         }
       }
       console.log(likeCount, 66);
-      if (likeCount !== blog.likeCount)
+      if (likeCount !== blog.likeCount) {
         await Blog.update({ id }).set({ likeCount });
+      }
 
       res.status(200).send({ like, blog: await Blog.findOne({ id }) });
     } catch (err) {

@@ -1,12 +1,8 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 module.exports = {
-
-
   friendlyName: 'Generate token',
 
-
   description: '',
-
 
   inputs: {
     id: {
@@ -19,37 +15,32 @@ module.exports = {
     }
   },
 
-
   exits: {
-
     success: {
-      description: 'All done.',
-    },
-
+      description: 'All done.'
+    }
   },
-
 
   fn: async function (inputs) {
     try {
-
-      let token = jwt.sign({
-        data: {
-          id: inputs.id,
-          email: inputs.email,
-          timestamp: Date.now()
+      const token = jwt.sign(
+        {
+          data: {
+            id: inputs.id,
+            email: inputs.email,
+            timestamp: Date.now()
+          }
+        },
+        sails.config.secret,
+        {
+          expiresIn: Date.now() + 1000 * (60 * 60)
         }
-      }, sails.config.secret, {
-        expiresIn: Date.now() + 1000 * (60 * 60)
-      })
+      );
 
-      return token
+      return token;
+    } catch (err) {
+      console.log(err);
+      return '';
     }
-    catch (err) {
-      return ''
-    }
-
   }
-
-
 };
-

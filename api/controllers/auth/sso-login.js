@@ -46,7 +46,7 @@ module.exports = {
     }
 
     const url = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
-
+    /* eslint-disable camelcase */
     const googleOAuthResponse = await axios
       .get(url, {
         params: {
@@ -88,7 +88,6 @@ module.exports = {
       userRecord.id,
       userRecord.email
     );
-    console.log(token, 92);
     if (token.trim() !== null) {
       const session = await Session.create({
         user: userRecord.id,

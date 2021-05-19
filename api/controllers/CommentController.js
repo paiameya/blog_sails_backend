@@ -63,7 +63,11 @@ module.exports = {
           const sanitizedComment = sanitizeHtml(filter.clean(req.body.text), {
             allowedTags: []
           });
-         result= await Comment.create({userId: req.me.id, blogId: id,text: sanitizedComment}).fetch();
+          result = await Comment.create({
+            userId: req.me.id,
+            blogId: id,
+            text: sanitizedComment
+          }).fetch();
         } else res.status(400).send('No comments Added');
         res.status(200).send(result);
       } else {
