@@ -50,8 +50,8 @@ module.exports = {
     let password = hash.digest("hex").toString("hex");
 
     if (userRecord.passwordHash === password) {
-      console.log("****", sails.config.locals.secret)
-      let token = await sails.helpers.generateToken({ id: userRecord.id, email: userRecord.email })
+      console.log("userRec", userRecord)
+      let token = await sails.helpers.generateToken(userRecord.id, userRecord.email)
       if (token.trim() !== '') {
         let session = await Session.create({
           user: userRecord.id,
