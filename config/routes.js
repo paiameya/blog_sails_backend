@@ -34,7 +34,7 @@ module.exports.routes = {
   '/blogs': 'BlogController.getBlogList',
   'GET /blog/:id/like': 'LikeController.getTotalLikesForBlog',
   'GET /blog/:id/like/user/:userId': 'LikeController.getUserLikes',
-  'PATCH /blog/:id/like/user/:userId': 'LikeController.putLikes'
+  'PATCH /blog/:id/like/user': 'LikeController.putLikes'
   /*************************************************************************
    *                                                                          *
    * More custom routes here...                                               *

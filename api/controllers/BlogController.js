@@ -13,11 +13,17 @@ module.exports = {
       let author = {};
       let name = null;
       let profilePic = null;
-      const categoryName = null;
       if (id) {
         const blog = await Blog.findOne({
           where: { id: id },
-          select: ['id', 'title', 'image', 'content', 'publishedDate', 'likeCount']
+          select: [
+            'id',
+            'title',
+            'image',
+            'content',
+            'publishedDate',
+            'likeCount'
+          ]
         })
           .populate('authorId')
           .populate('categoryId');
@@ -35,8 +41,8 @@ module.exports = {
             author = { name, profilePic };
           }
           if (blog.categoryId !== null) {
-            category = blog.categoryId.name;
-            responseObj = { ...responseObj, categoryName };
+            category = blog.categoryId;
+            responseObj = { ...responseObj };
           }
           delete blog.authorId;
           delete blog.categoryId;

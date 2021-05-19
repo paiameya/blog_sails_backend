@@ -4,7 +4,10 @@
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
-
+const updateTitleToLowerCase = (valuesToSet, proceed) => {
+  valuesToSet.title = valuesToSet.title?.toLowerCase();
+  return proceed();
+};
 module.exports = {
   attributes: {
     content: { type: 'string', required: true },
@@ -24,7 +27,7 @@ module.exports = {
     like: {
       collection: 'like',
       via: 'blogId'
-    },
+    }
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
@@ -40,7 +43,3 @@ module.exports = {
   beforeCreate: updateTitleToLowerCase,
   beforeUpdate: updateTitleToLowerCase
 };
-function updateTitleToLowerCase(valuesToSet, proceed) {
-  valuesToSet.title = valuesToSet.title.toLowerCase()
-  return proceed();
-}
