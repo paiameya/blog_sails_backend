@@ -17,7 +17,7 @@ module.exports = {
       if (id) {
         const blog = await Blog.findOne({
           where: { id: id },
-          select: ['id', 'title', 'image', 'content', 'publishedDate']
+          select: ['id', 'title', 'image', 'content', 'publishedDate', 'likeCount']
         })
           .populate('authorId')
           .populate('categoryId');
@@ -67,7 +67,6 @@ module.exports = {
       let count = 0;
       let query = {};
       let sortQuery = {};
-
       if (category) {
         if (!Array.isArray(category)) {
           category = [category.trim().toLowerCase()];
@@ -93,10 +92,25 @@ module.exports = {
       if (sortBy) {
         sortBy = sortBy.trim();
         sortQuery = { sort: `${sortBy} ${sortOrder}` };
-        console.log('sortQuery', sortQuery);
       }
-      count = await Blog.count({ where: { ...query, title: { contains: search.trim().toLowerCase() } } })
-      let result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } }).skip(offset).limit(limit)
+      count = await Blog.count({
+        where: { ...query, title: { contains: search } }
+      });
+      const result = await Blog.find({
+        where: { ...query, title: { contains: search } },
+        ...sortQuery
+      })
+        .populate('like', { where: { review: 1 } })
+        .populate('categoryId')
+        .skip(offset)
+        .limit(limit)
+        .then(blogs => {
+          blogs.forEach(blog => {
+            blog.likes = blog.like.length;
+            delete blog.like;
+          });
+          return blogs;
+        });
 
       const users = [...new Set(result.map(b => b.authorId))];
       let authorList = await User.find({ id: { in: users } }).populate(
