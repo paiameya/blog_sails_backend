@@ -31,13 +31,14 @@ module.exports = {
 
   fn: async function (inputs) {
     try {
+
       let token = jwt.sign({
         data: {
           id: inputs.id,
           email: inputs.email,
           timestamp: Date.now()
         }
-      }, sails.config.local.secret, {
+      }, sails.config.secret, {
         expiresIn: Date.now() + 1000 * (60 * 5)
       })
 
