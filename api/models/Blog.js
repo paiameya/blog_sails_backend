@@ -12,6 +12,7 @@ module.exports = {
     summary: { type: 'string', required: true },
     image: { type: 'string', required: true },
     publishedDate: { type: 'number', required: true },
+    likeCount: { type: 'number', required: true },
     authorId: {
       model: 'user',
       required: true

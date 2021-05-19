@@ -96,15 +96,7 @@ module.exports = {
         console.log('sortQuery', sortQuery);
       }
       count = await Blog.count({ where: { ...query, title: { contains: search } } })
-      let result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } }).populate('like', { where: { review: 1 } }).skip(offset)
-        .limit(limit)
-        .then(function (blogs) {
-          blogs.forEach(function (blog) {
-            blog.likes = blog.like.length;
-            delete blog.like
-          });
-          return blogs
-        });
+      let result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } }).skip(offset).limit(limit)
 
       const users = [...new Set(result.map(b => b.authorId))]
       let authorList = await User.find({ id: { in: users } }).populate('profile')
