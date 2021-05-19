@@ -22,7 +22,7 @@ module.exports = {
         try {
             const { id, userId } = req.params
             const userLikes = await Like.findOne({ where: { blogId: id, userId: userId }, select: ['review'] })
-            if (userLikes.review) {
+            if (userLikes?.review) {
                 res.status(200).send(userLikes.review === 1 ? "thumbs up" : userLikes.review === 0 ? "not rated(removed the rating)" : "thumbs down")
             }
             else
