@@ -38,5 +38,11 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-  }
+  },
+  beforeCreate: updateNameToLowerCase,
+  beforeUpdate: updateNameToLowerCase
+}
+function updateNameToLowerCase(valuesToSet, proceed) {
+  valuesToSet.name = valuesToSet.name.toLowerCase()
+  return proceed();
 };

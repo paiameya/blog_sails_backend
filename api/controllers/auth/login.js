@@ -56,7 +56,7 @@ module.exports = {
         let session = await Session.create({
           user: userRecord.id,
           sessionToken: token,
-          expiresAt: Date.now() + 1000 * (60 * 5),
+          expiresAt: Date.now() + 1000 * (60 * 60),
           status: 1
         }).fetch();
         const userId = userRecord.id;

@@ -39,7 +39,7 @@ module.exports = {
           timestamp: Date.now()
         }
       }, sails.config.secret, {
-        expiresIn: Date.now() + 1000 * (60 * 5)
+        expiresIn: Date.now() + 1000 * (60 * 60)
       })
 
       return token
