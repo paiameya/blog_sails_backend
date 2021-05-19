@@ -9,17 +9,20 @@
  */
 
 module.exports.policies = {
-
   /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions, unless overridden.       *
-  * (`true` allows public access)                                            *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Default policy for all controllers and actions, unless overridden.       *
+   * (`true` allows public access)                                            *
+   *                                                                          *
+   ***************************************************************************/
 
   // '*': true,
-  'CommentController': {
-    'postComment': 'is-logged-in'
+  CommentController: {
+    postComment: 'is-logged-in'
+  },
+  'LikeController': {
+    'getUserLikes': 'is-logged-in',
+    'putLikes': 'is-logged-in',
   },
   'auth/logout': 'is-logged-in'
 };

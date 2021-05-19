@@ -10,8 +10,12 @@ module.exports = {
   getComments: async function (req, res) {
     try {
       const { id } = req.params;
+      const { offset = 0, limit = 10 } = req.query;
       if (id) {
-        const comments = await Comment.find({ blogId: id });
+        const comments = await Comment.find({ blogId: id })
+          .sort('createdAt DESC')
+          .skip(offset)
+          .limit(limit);
         const count = await Comment.count({ blogId: id });
         if (!comments) {
           res.status(400).send('No Comments Found');

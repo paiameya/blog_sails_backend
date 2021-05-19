@@ -1,28 +1,22 @@
 module.exports = {
-
-
   friendlyName: 'Logout',
-
 
   description: 'Logout auth.',
 
-
-  inputs: {
-
-  },
-
+  inputs: {},
 
   exits: {
-
+    success: {
+      description: "Successfully logged out"
+    }
   },
 
 
-  fn: async function (inputs) {
+
+
+  fn: async function (inputs, exits) {
 
     let session = await Session.update({ sessionToken: this.req.sessionToken, status: 1 }).set({ status: 0 })
-    if (session)
-      return "Successfully Logged Out"
+    this.res.status(200).send("Successfully logged out");
   }
-
-
 };
