@@ -20,5 +20,9 @@ module.exports.policies = {
   CommentController: {
     postComment: 'is-logged-in'
   },
+  'LikeController': {
+    'getUserLikes': 'is-logged-in',
+    'putLikes': 'is-logged-in',
+  },
   'auth/logout': 'is-logged-in'
 };
