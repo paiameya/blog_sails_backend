@@ -37,7 +37,7 @@ module.exports = {
           email: inputs.email,
           timestamp: Date.now()
         }
-      }, sails.config.locals.secret, {
+      }, sails.config.local.secret, {
         expiresIn: Date.now() + 1000 * (60 * 5)
       })
 
