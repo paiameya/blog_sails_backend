@@ -1,6 +1,7 @@
 const axios = require('axios');
-const crypto = require('crypto');
-const { v4: uuidv4 } = require('uuid');
+const jwt = require("jsonwebtoken")
+const crypto = require("crypto")
+const { v4: uuidv4 } = require('uuid')
 module.exports = {
   friendlyName: 'Sso login',
 
@@ -46,7 +47,7 @@ module.exports = {
     }
 
     const url = 'https://www.googleapis.com/oauth2/v3/tokeninfo';
-    /* eslint-disable camelcase */
+
     const googleOAuthResponse = await axios
       .get(url, {
         params: {
@@ -83,17 +84,24 @@ module.exports = {
         salt: salt
       }).fetch()
     }
+    let token = await sails.helpers.generateToken(id = userRecord.id, email = userRecord.email)
+    if (token.trim() !== null) {
+      let session = await Session.create({
+        user: userRecord.id,
+        sessionToken: token,
+        expiresAt: Date.now() + 1000 * (60 * 5),
+        status: 1
+      }).fetch();
 
-    const token = crypto.randomBytes(10).toString('hex');
-    const session = await Session.create({
-      user: userRecord.id,
-      sessionToken: token,
-      expiresAt: Date.now() + 1000 * (60 * 5),
-      status: 1
-    }).fetch();
+      return this.res
+        .status(200)
+        .send({ userId: userRecord.id, sessionToken: session.sessionToken });
+    }
+    else {
+      this.res.send("Login failed")
+    }
 
-    return this.res
-      .status(200)
-      .send({ userId: userRecord.id, sessionToken: session.sessionToken });
   }
+
+
 };

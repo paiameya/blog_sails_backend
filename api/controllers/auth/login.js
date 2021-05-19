@@ -1,4 +1,6 @@
-const crypto = require('crypto');
+const crypto = require('crypto')
+const jwt = require("jsonwebtoken");
+
 module.exports = {
   friendlyName: 'Login',
 
@@ -45,19 +47,27 @@ module.exports = {
     const hash = crypto.createHmac('sha256', userRecord.salt);
 
     hash.update(inputs.password);
-    const password = hash.digest('hex').toString('hex');
-    if (userRecord.passwordHash === password) {
-      const token = crypto.randomBytes(10).toString('hex');
-      const session = await Session.create({
-        user: userRecord.id,
-        sessionToken: token,
-        expiresAt: Date.now() + 1000 * (60 * 5),
-        status: 1
-      }).fetch();
-      const userId = userRecord.id;
-      const sessionToken = session.sessionToken;
+    let password = hash.digest("hex").toString("hex");
 
-      return exits.success({ userId, sessionToken });
+    if (userRecord.passwordHash === password) {
+      console.log("userRec", userRecord)
+      let token = await sails.helpers.generateToken(userRecord.id, userRecord.email)
+      if (token.trim() !== '') {
+        let session = await Session.create({
+          user: userRecord.id,
+          sessionToken: token,
+          expiresAt: Date.now() + 1000 * (60 * 5),
+          status: 1
+        }).fetch();
+        const userId = userRecord.id;
+        const sessionToken = session.sessionToken;
+
+        return exits.success({ userId, sessionToken });
+      }
+      else {
+        this.res.send("Login failed")
+      }
+
     } else {
       return exits.invalidPassword('Invalid Password');
     }
