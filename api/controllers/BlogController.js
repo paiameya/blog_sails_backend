@@ -95,7 +95,7 @@ module.exports = {
         sortQuery = { sort: `${sortBy} ${sortOrder}` };
         console.log('sortQuery', sortQuery);
       }
-      count = await Blog.count({ where: { ...query, title: { contains: search } } })
+      count = await Blog.count({ where: { ...query, title: { contains: search.trim().toLowerCase() } } })
       let result = await Blog.find({ where: query, ...sortQuery }).where({ 'title': { contains: search } }).skip(offset).limit(limit)
 
       const users = [...new Set(result.map(b => b.authorId))];
@@ -106,7 +106,7 @@ module.exports = {
         .map(_user => ({
           [_user.id]: {
             name: _user.name,
-            profilePic: _user.profile.profilePicture
+            profilePic: _user.profile?.profilePicture
           }
         }))
         .reduce((a, b) => ({ ...a, ...b }), {});

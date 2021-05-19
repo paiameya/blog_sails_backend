@@ -24,7 +24,7 @@ module.exports = {
     like: {
       collection: 'like',
       via: 'blogId'
-    }
+    },
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
@@ -36,5 +36,11 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-  }
+  },
+  beforeCreate: updateTitleToLowerCase,
+  beforeUpdate: updateTitleToLowerCase
 };
+function updateTitleToLowerCase(valuesToSet, proceed) {
+  valuesToSet.title = valuesToSet.title.toLowerCase()
+  return proceed();
+}
