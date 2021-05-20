@@ -23,5 +23,9 @@ module.exports.policies = {
   LikeController: {
     putLikes: 'is-logged-in'
   },
-  'auth/logout': 'is-logged-in'
+  'auth/logout': 'is-logged-in',
+  SessionController: {
+    "*": false,
+  },
+
 };
