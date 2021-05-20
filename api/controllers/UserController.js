@@ -26,7 +26,7 @@ module.exports = {
         }
       }
     } catch (err) {
-      console.log('err', err);
+      sails.log('err', err);
       res.status(500).json('Something went wrong');
     }
   }
