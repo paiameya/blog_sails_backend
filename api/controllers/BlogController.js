@@ -38,7 +38,7 @@ module.exports = {
           if (blogAuthor !== null) {
             name = blogAuthor.name || null;
             profilePic = blogAuthor.profile?.profilePicture || null;
-            author = { name, profilePic };
+            author = { id:authorId,name, profilePic };
           }
           if (blog.categoryId !== null) {
             category = blog.categoryId;
@@ -53,7 +53,7 @@ module.exports = {
         }
       }
     } catch (err) {
-      console.log('*****err****', err);
+      sails.log('*****err****', err);
       res.status(500).send('something went wrong');
     }
   },
@@ -138,7 +138,7 @@ module.exports = {
       }
       return res.status(200).send({ result, count });
     } catch (err) {
-      console.log(err);
+      sails.log(err);
       return res
         .status(500)
         .send(
