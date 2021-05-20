@@ -38,7 +38,7 @@ module.exports = {
           if (blogAuthor !== null) {
             name = blogAuthor.name || null;
             profilePic = blogAuthor.profile?.profilePicture || null;
-            author = { id:authorId,name, profilePic };
+            author = { id: authorId, name, profilePic };
           }
           if (blog.categoryId !== null) {
             category = blog.categoryId;
@@ -102,10 +102,11 @@ module.exports = {
       count = await Blog.count({
         where: { ...query, title: { contains: search } }
       });
+
       const result = await Blog.find({
-        where: { ...query, title: { contains: search } },
+        where: { ...query, title: { contains: search }, },
         ...sortQuery
-      })
+      }).meta({ makeLikeModifierCaseInsensitive: true })
         .populate('like', { where: { review: 1 } })
         .populate('categoryId')
         .skip(offset)
@@ -117,6 +118,7 @@ module.exports = {
           });
           return blogs;
         });
+
 
       const users = [...new Set(result.map(b => b.authorId))];
       let authorList = await User.find({ id: { in: users } }).populate(
