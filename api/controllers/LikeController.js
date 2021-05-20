@@ -36,7 +36,7 @@ module.exports = {
           );
       } else res.status(200).send('not rated');
     } catch (err) {
-      console.log('error', err);
+      sails.log('error', err);
       res.status(500).send(err);
     }
   },
@@ -45,7 +45,6 @@ module.exports = {
       const { review } = req.body;
       const { id } = req.params;
       const userId = req.me.id;
-      console.log(review, id, 48);
       if (![1, 0, -1].includes(review)) {
         return res.status(400).send('invalid review provided');
       }
@@ -63,7 +62,6 @@ module.exports = {
           await Like.update({ id: like.id }).set({ review });
         }
       }
-      console.log(likeCount, 66);
       if (likeCount !== blog.likeCount) {
         await Blog.update({ id }).set({ likeCount });
       }

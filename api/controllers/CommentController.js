@@ -45,7 +45,7 @@ module.exports = {
         }
       }
     } catch (err) {
-      console.log('*****err****', err);
+      sails.log('*****err****', err);
       res.status(500).send(err);
     }
   },
@@ -74,7 +74,7 @@ module.exports = {
         res.status(400).send('No comments Added');
       }
     } catch (err) {
-      console.log('*****err****', err);
+      sails.log('*****err****', err);
       res.status(500).send(err);
     }
   }
